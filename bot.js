@@ -15,7 +15,7 @@ client.on('ready', () => {
     client.user.setStatus("idle")
 });
  
-const prefix = "9"
+const prefix = "1"
 client.on('message', async msg => {
     if (msg.author.bot) return undefined;
  
@@ -209,7 +209,7 @@ function play(guild, song) {
     serverQueue.textChannel.send(`بدء تشغيل : **${song.title}**`);
 }
  
-const adminprefix = "1";
+const adminprefix = "$";
 const devs = ['302354407864139777'];
 client.on('message', message => {
   var argresult = message.content.split(` `).slice(1).join(' ');
