@@ -15,7 +15,7 @@ client.on('ready', () => {
     client.user.setStatus("Online")
 });
  
-const prefix = "$$"
+const prefix = "A"
 client.on('message', async msg => {
     if (msg.author.bot) return undefined;
  
@@ -29,7 +29,7 @@ client.on('message', async msg => {
     let command = msg.content.toLowerCase().split(" ")[0];
     command = command.slice(prefix.length)
  
-    if (command === `play`) {
+    if (command === `تشغيل`) {
         const voiceChannel = msg.member.voiceChannel;
         if (!voiceChannel) return msg.channel.send('يجب توآجد حضرتك بروم صوتي .');
         const permissions = voiceChannel.permissionsFor(msg.client.user);
@@ -90,18 +90,18 @@ ${videos.map(video2 => `[**${++index} **] \`${video2.title}\``).join('\n')}`)
  
             return handleVideo(video, msg, voiceChannel);
         }
-    } else if (command === `skip`) {
+    } else if (command === `تجاوز`) {
         if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
         if (!serverQueue) return msg.channel.send('لا يتوفر مقطع لتجآوزه');
         serverQueue.connection.dispatcher.end('تم تجآوز هذآ المقطع');
         return undefined;
-    } else if (command === `stop`) {
+    } else if (command === `اخرج`) {
         if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
         if (!serverQueue) return msg.channel.send('لا يتوفر مقطع لإيقآفه');
         serverQueue.songs = [];
         serverQueue.connection.dispatcher.end('تم إيقآف هذآ المقطع');
         return undefined;
-        } else if (command === `vol`) {
+        } else if (command === `صوت`) {
         if (!msg.member.voiceChannel) return msg.channel.send('أنت لست بروم صوتي .');
         if (!serverQueue) return msg.channel.send('لا يوجد شيء شغآل.');
         if (!args[1]) return msg.channel.send(`:loud_sound: مستوى الصوت **${serverQueue.volume}**`);
@@ -209,43 +209,19 @@ function play(guild, song) {
     serverQueue.textChannel.send(`بدء تشغيل : **${song.title}**`);
 }
  
-const adminprefix = "$";
-const devs = ['302354407864139777'];
-client.on('message', message => {
-  var argresult = message.content.split(` `).slice(1).join(' ');
-    if (!devs.includes(message.author.id)) return;
- 
-if (message.content.startsWith(adminprefix + 'setgame')) {
-  client.user.setGame(argresult);
-    message.channel.sendMessage(`**${argresult} تم تغيير بلاينق البوت إلى **`)
-} else
-  if (message.content.startsWith(adminprefix + 'setname')) {
-client.user.setUsername(argresult).then
-    message.channel.sendMessage(`**${argresult}** : تم تغيير أسم البوت إلى`)
-return message.reply("**لا يمكنك تغيير الاسم يجب عليك الانتظآر لمدة ساعتين . **");
-} else
-  if (message.content.startsWith(adminprefix + 'setavatar')) {
-client.user.setAvatar(argresult);
-  message.channel.sendMessage(`**${argresult}** : تم تغير صورة البوت`);
-      } else
-if (message.content.startsWith(adminprefix + 'setT')) {
-  client.user.setGame(argresult, "https://www.twitch.tv/idk");
-    message.channel.sendMessage(`**تم تغيير تويتش البوت إلى  ${argresult}**`)
-}
- 
-});
+
  
 client.on("message", message => {
  if (message.content === `${prefix}help`) {
   const embed = new Discord.RichEmbed()
       .setColor("#000000")
       .setDescription(`
-${prefix}play ⇏ لتشغيل أغنية برآبط أو بأسم
-${prefix}skip ⇏ لتجآوز الأغنية الحآلية
+${prefix}تشغيل ⇏ لتشغيل أغنية برآبط أو بأسم
+${prefix}تجاوز ⇏ لتجآوز الأغنية الحآلية
 ${prefix}pause ⇏ إيقآف الأغنية مؤقتا
 ${prefix}resume ⇏ لموآصلة الإغنية بعد إيقآفهآ مؤقتا
-${prefix}vol ⇏ لتغيير درجة الصوت 100 - 0
-${prefix}stop ⇏ لإخرآج البوت من الروم
+${prefix}صوت ⇏ لتغيير درجة الصوت 100 - 0
+${prefix}اخرج ⇏ لإخرآج البوت من الروم
 ${prefix}np ⇏ لمعرفة الأغنية المشغلة حآليا
 ${prefix}queue ⇏ لمعرفة قآئمة التشغيل
  
