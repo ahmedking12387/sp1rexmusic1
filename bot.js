@@ -7,6 +7,21 @@ const YouTube = require('simple-youtube-api');
 const youtube = new YouTube("AIzaSyAdORXg7UZUo7sePv97JyoDqtQVi3Ll0b8");
 const queue = new Map();
 const client = new Discord.Client();
+const bot = new Discord.Client({disableEveryone: true})
+bot.on("message", async message => {
+    if (message.author.bot) return;
+    if (message.channel.type === "dm") return;
+    if (!message.member.voiceChannel) return message.channel.send('I can\'t find u in any voice channel')
+    let prefix = "البرفكس";
+    let messageArray = message.content.split(" ");
+    let command = messageArray[0];
+
+if (command === `${prefix}join`) {
+        message.member.voiceChannel.join()
+    message.channel.send('Okey, joined your voice channel.')
+};
+
+});
  
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
